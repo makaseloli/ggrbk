@@ -3,7 +3,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-alert title="知識はここから" type="info" text="人に聞くのは最終手段です。一通り調べてから聞くようにしましょう。"></v-alert>
+        <v-alert title="検索を開始。" type="info" text="人に聞くのは最終手段です。一通り調べてから聞くようにしましょう。"></v-alert>
         <br>
         <v-select v-model="selectedEngine" :items="Engines" item-title="name" item-value="url"
           label="検索エンジンを選択"></v-select>
@@ -14,9 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useHead } from '@unhead/vue'
 
 const STORAGE_KEY = 'ggrbk:selectedEngine'
 
@@ -45,25 +44,6 @@ const Engines = ref([
 ])
 
 const defaultEngineUrl = Engines.value[0]?.url ?? null
-
-const metaDescription = computed(() => {
-  const keyword = searchQuery.value.trim()
-  return keyword ? `🔍 ${keyword}` : '検索を開始。'
-})
-
-useHead(() => ({
-  title: metaDescription.value,
-  meta: [
-    {
-      name: 'description',
-      content: metaDescription.value
-    },
-    {
-      property: 'og:description',
-      content: metaDescription.value
-    }
-  ]
-}))
 
 onMounted(() => {
   if (typeof window === 'undefined') return

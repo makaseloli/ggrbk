@@ -705,14 +705,6 @@
     "@typescript-eslint/types" "8.45.0"
     eslint-visitor-keys "^4.2.1"
 
-"@unhead/vue@^2.0.17":
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/@unhead/vue/-/vue-2.0.17.tgz#8032de4819b15a9ed5f2b72b25095872468f2425"
-  integrity sha512-jzmGZYeMAhETV6qfetmLbZzUjjx1TjdNvFSobeFZb73D7dwD9wl/nOAx36qq+TvjZsLJdF5PQWToz2oDGAUqCg==
-  dependencies:
-    hookable "^5.5.3"
-    unhead "2.0.17"
-
 "@vitejs/plugin-vue@^6.0.1":
   version "6.0.1"
   resolved "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-6.0.1.tgz"
@@ -1602,11 +1594,6 @@ has-flag@^4.0.0:
   resolved "https://registry.npmjs.org/has-flag/-/has-flag-4.0.0.tgz"
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
-hookable@^5.5.3:
-  version "5.5.3"
-  resolved "https://registry.npmjs.org/hookable/-/hookable-5.5.3.tgz"
-  integrity sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==
-
 ignore@^5.2.0:
   version "5.3.2"
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.3.2.tgz"
@@ -2460,13 +2447,6 @@ undici-types@~6.21.0:
   version "6.21.0"
   resolved "https://registry.npmjs.org/undici-types/-/undici-types-6.21.0.tgz"
   integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
-
-unhead@2.0.17:
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/unhead/-/unhead-2.0.17.tgz#fd4e9943dd84bd2590aff80cb63def65dd81c863"
-  integrity sha512-xX3PCtxaE80khRZobyWCVxeFF88/Tg9eJDcJWY9us727nsTC7C449B8BUfVBmiF2+3LjPcmqeoB2iuMs0U4oJQ==
-  dependencies:
-    hookable "^5.5.3"
 
 unplugin-fonts@^1.4.0:
   version "1.4.0"
