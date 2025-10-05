@@ -1,11 +1,5 @@
 <template>
     <v-app-bar>
-        <!-- <template v-slot:prepend>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    </template> -->
-
-        <v-progress-linear indeterminate v-if="isNavigating"></v-progress-linear>
-
         <v-app-bar-title><span class="gg">Goog</span><span class="bg">ling</span><span class="go">Go</span><span
                 class="jp">!
                 Japan</span></v-app-bar-title>
@@ -60,14 +54,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
 
 const share = ref(false)
-const isNavigating = ref(false)
 const copySnackbar = ref(false)
 const locationOrigin = typeof window !== 'undefined' ? window.location.origin : ''
-
 
 const copyHref = async () => {
     try {

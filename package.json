@@ -2,7 +2,7 @@
   "name": "ggrbk-vue",
   "private": true,
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",

@@ -73,7 +73,7 @@ const onSearchSubmit = () => {
   if (!searchQuery.value || !selectedEngine.value) return
 
   const searchUrl = selectedEngine.value + encodeURIComponent(searchQuery.value)
-  window.open(searchUrl, '_blank', 'noopener,noreferrer')
+  window.location.href = searchUrl
 }
 
 </script>
