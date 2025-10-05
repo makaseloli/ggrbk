@@ -14,14 +14,22 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 
 const STORAGE_KEY = 'ggrbk:selectedEngine'
 
-const params = new URLSearchParams(window.location.search)
-const query = params.get('q') ?? ''
+const route = useRoute()
 
-const searchQuery = ref(query)
+const resolveQueryParam = (rawQuery: unknown): string => {
+  if (Array.isArray(rawQuery)) {
+    return rawQuery[0] ?? ''
+  }
+  return typeof rawQuery === 'string' ? rawQuery : ''
+}
+
+const searchQuery = ref(resolveQueryParam(route.query.q))
 const selectedEngine = ref<string | null>(null)
 const Engines = ref([
   { name: 'Google', url: 'https://www.google.com/search?q=' },
@@ -38,40 +46,30 @@ const Engines = ref([
 
 const defaultEngineUrl = Engines.value[0]?.url ?? null
 
-const syncMeta = () => {
-  if (typeof document === 'undefined') return
-
+const metaDescription = computed(() => {
   const keyword = searchQuery.value.trim()
-  const displayText = keyword ? `🔍 ${keyword}` : '検索を開始。'
+  return keyword ? `🔍 ${keyword}` : '検索を開始。'
+})
 
-  document.title = displayText
-
-  const ensureMeta = (selector: string, attributes: Record<string, string>) => {
-    let meta = document.querySelector<HTMLMetaElement>(selector)
-    if (!meta) {
-      meta = document.createElement('meta')
-      for (const [key, value] of Object.entries(attributes)) {
-        meta.setAttribute(key, value)
-      }
-      document.head.appendChild(meta)
+useHead(() => ({
+  title: metaDescription.value,
+  meta: [
+    {
+      name: 'description',
+      content: metaDescription.value
+    },
+    {
+      property: 'og:description',
+      content: metaDescription.value
     }
-    return meta
-  }
-
-  const descriptionMeta = ensureMeta('meta[name="description"]', { name: 'description' })
-  descriptionMeta.setAttribute('content', displayText)
-
-  const ogDescriptionMeta = ensureMeta('meta[property="og:description"]', { property: 'og:description' })
-  ogDescriptionMeta.setAttribute('content', displayText)
-}
+  ]
+}))
 
 onMounted(() => {
   if (typeof window === 'undefined') return
 
   const savedEngine = window.localStorage.getItem(STORAGE_KEY)
   selectedEngine.value = savedEngine ?? defaultEngineUrl
-
-  syncMeta()
 })
 
 watch(selectedEngine, (newValue) => {
@@ -84,15 +82,18 @@ watch(selectedEngine, (newValue) => {
   }
 })
 
-watch(searchQuery, () => {
-  syncMeta()
-})
+watch(
+  () => route.query.q,
+  (newQuery) => {
+    searchQuery.value = resolveQueryParam(newQuery)
+  }
+)
 
 const onSearchSubmit = () => {
   if (!searchQuery.value || !selectedEngine.value) return
 
   const searchUrl = selectedEngine.value + encodeURIComponent(searchQuery.value)
-  window.open(searchUrl, '_blank')
+  window.open(searchUrl, '_blank', 'noopener,noreferrer')
 }
 
 </script>
