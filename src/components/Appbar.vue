@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar>
+    <v-app-bar elevation="0">
         <v-app-bar-title><span class="gg">Goog</span><span class="bg">ling</span><span class="go">Go</span><span
                 class="jp">!
                 Japan</span></v-app-bar-title>
@@ -12,7 +12,7 @@
             </template>
 
             <template v-slot:default="{ isActive }">
-                <v-card title="ヒント">
+                <v-card prepend-icon="mdi-help-circle-outline" title="ヒント">
                     <v-card-text>
                         URLパラメータを使って、検索クエリを指定できます。<br>
                         例えば、以下のようにURLを指定します。<br>
@@ -23,7 +23,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
 
-                        <v-btn text="わかった。" @click="isActive.value = false"></v-btn>
+                        <v-btn variant="outlined" rounded text="わかった。" @click="isActive.value = false"></v-btn>
                     </v-card-actions>
                 </v-card>
             </template>

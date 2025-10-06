@@ -8,20 +8,22 @@
         <br>
         <v-dialog max-width="500">
             <template v-slot:activator="{ props: activatorProps }">
-                <v-btn v-bind="activatorProps"><v-icon>mdi-pencil</v-icon>カスタマイズ</v-btn>
+                <v-btn variant="outlined" rounded v-bind="activatorProps"><v-icon>mdi-pencil</v-icon>カスタマイズ</v-btn>
             </template>
 
             <template v-slot:default="{ isActive }">
-                <v-card title="ウィジェットのカスタマイズ">
-                    <div v-for="widget in widgets" :key="widget">
-                        <v-checkbox :label="widget" :value="widget" v-model="isActiveWidgets" density="compact"
-                            hide-details></v-checkbox>
-                    </div>
+                <v-card prepend-icon="mdi-pencil" title="ウィジェットのカスタマイズ">
+                    <v-card-text>
+                        <div v-for="widget in widgets" :key="widget">
+                            <v-checkbox :label="widget" :value="widget" v-model="isActiveWidgets" density="compact"
+                                hide-details></v-checkbox>
+                        </div>
+                    </v-card-text>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
 
-                        <v-btn text="閉じる" @click="isActive.value = false"></v-btn>
+                        <v-btn variant="outlined" rounded text="閉じる" @click="isActive.value = false"></v-btn>
                     </v-card-actions>
                 </v-card>
             </template>

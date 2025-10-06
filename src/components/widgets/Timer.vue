@@ -1,16 +1,14 @@
 <template>
-    <v-card height="310px">
-        <v-card-item title="タイマー" class="pb-0"></v-card-item>
+    <v-card prepend-icon="mdi-timer-outline" title="タイマー" variant="outlined" height="310px">
         <v-card-text class="d-flex justify-center">
             <v-progress-circular :model-value="progress" size="150" width="15">
                 <span>{{ formattedNowTime }}</span>
             </v-progress-circular>
         </v-card-text>
         <v-card-actions class="d-flex justify-center">
-            <v-text-field v-model.number="setTime" label="秒" type="number" min="0" max="3600" step="1"
-                style="max-width: 200px;"></v-text-field>
-            <v-btn @click="nowTime = setTime; startTimer()">スタート</v-btn>
-            <v-btn @click="nowTime = 0">リセット</v-btn>
+            <v-btn variant="flat" rounded @click="nowTime = setTime; startTimer()">スタート</v-btn>
+            <v-number-input variant="filled" inset reverse v-model.number="setTime" label="秒" type="number" style="max-width: 200px;"></v-number-input>
+            <v-btn variant="flat" rounded @click="nowTime = 0">リセット</v-btn>
         </v-card-actions>
     </v-card>
 </template>

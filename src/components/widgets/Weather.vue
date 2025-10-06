@@ -1,35 +1,40 @@
 <template>
-    <v-card height="310px">
-        <v-skeleton-loader v-if="!location && !temperature" type="article"></v-skeleton-loader>
-        <div v-else>
-            <v-card-item :title="location" class="pb-0"></v-card-item>
+    <v-card v-if="!location && !temperature" variant="outlined" height="310px">
+        <v-skeleton-loader type="article"></v-skeleton-loader>
+    </v-card>
+    <v-card v-else prepend-icon="mdi-map-marker-outline" :title="location" append-icon="mdi-open-in-new"
+        :href="`https://www.windy.com/?${latlong.lat},${latlong.lon},10`" target="_blank" variant="outlined"
+        height="310px">
+        <v-card-text class="py-0">
+            <v-row align="center" no-gutters>
+                <v-col class="text-h2" cols="5.5">
+                    {{ temperature }}&deg;C
+                </v-col>
 
-            <v-card-text class="py-0">
-                <v-row align="center" no-gutters>
-                    <v-col class="text-h2" cols="5.5">
-                        {{ temperature }}&deg;C
-                    </v-col>
+                <v-col class="text-right" cols="5.5">
+                    <v-icon :color="currentWeatherColor" :icon="currentWeatherIcon" size="88"></v-icon>
+                </v-col>
+            </v-row>
+        </v-card-text>
 
-                    <v-col class="text-right" cols="5.5">
-                        <v-icon :color="currentWeatherColor" :icon="currentWeatherIcon" size="88"></v-icon>
-                    </v-col>
-                </v-row>
-            </v-card-text>
+        <div class="py-3">
+            <v-list-item density="compact" prepend-icon="mdi-weather-windy">
+                <v-list-item-subtitle>{{ wind }} km/h</v-list-item-subtitle>
+            </v-list-item>
 
-            <div class="py-3">
-                <v-list-item density="compact" prepend-icon="mdi-weather-windy">
-                    <v-list-item-subtitle>{{ wind }} km/h</v-list-item-subtitle>
-                </v-list-item>
+            <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
+                <v-list-item-subtitle>{{ probability }}%</v-list-item-subtitle>
+            </v-list-item>
 
-                <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
-                    <v-list-item-subtitle>{{ probability }}%</v-list-item-subtitle>
-                </v-list-item>
-
-                <v-list-item density="compact" prepend-icon="mdi-water-percent">
-                    <v-list-item-subtitle>{{ humidity }}%</v-list-item-subtitle>
-                </v-list-item>
-            </div>
+            <v-list-item density="compact" prepend-icon="mdi-water-percent">
+                <v-list-item-subtitle>{{ humidity }}%</v-list-item-subtitle>
+            </v-list-item>
         </div>
+
+        <v-divider></v-divider>
+        <v-list-item density="compact" prepend-icon="mdi-weather-sunset">
+            <v-list-item-subtitle>Powered by Open-Meteo</v-list-item-subtitle>
+        </v-list-item>
     </v-card>
 </template>
 
@@ -44,13 +49,19 @@ const probability = ref('')
 const humidity = ref('')
 const weatherCode = ref('')
 
+const openExtService = () => {
+    if (typeof window !== 'undefined') {
+        window.open(`https://www.windy.com/${latlong.value.lat},${latlong.value.lon}`, '_blank')
+    }
+}
+
 const weatherCodes: Record<string, [string, string]> = {
-    '0': ['mdi-weather-sunny', 'success'],
+    '0': ['mdi-weather-sunny', 'error'],
     '1': ['mdi-weather-partly-cloudy', 'warning'],
     '2': ['mdi-weather-cloudy', 'info'],
     '3': ['mdi-weather-overcast', 'info'],
-    '45': ['mdi-weather-fog', 'error'],
-    '48': ['mdi-weather-fog', 'error'],
+    '45': ['mdi-weather-fog', 'success'],
+    '48': ['mdi-weather-fog', 'success'],
 }
 
 const currentWeatherIcon = computed(() => weatherCodes[weatherCode.value]?.[0] || 'mdi-help-circle')
