@@ -42,7 +42,9 @@ const Engines = ref([
   { name: 'Brave', url: 'https://search.brave.com/search?q=' },
   { name: 'Startpage', url: 'https://www.startpage.com/do/dsearch?query=' },
   { name: 'Karama', url: 'https://karmasearch.org/search?q=' },
-  { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=' }
+  { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=' },
+  { name: 'ChatGPT', url: 'https://chatgpt.com/?q=' },
+  { name: 'Copilot', url: 'https://copilot.microsoft.com/?q=' },
 ])
 
 const defaultEngineUrl = Engines.value[0]?.url ?? null
