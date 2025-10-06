@@ -1,6 +1,6 @@
 <template>
     <v-app-bar elevation="0">
-        <v-app-bar-title><span class="gg">Goog</span><span class="bg">ling</span><span class="go">Go</span><span class="ex">!</span><span class="jp"> Japan</span></v-app-bar-title>
+        <v-app-bar-title><span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span class="ex">!</span><span class="jp"> Japan</span></v-app-bar-title>
 
         <v-btn icon="mdi-share-variant-outline" @click="share = true"></v-btn>
 
