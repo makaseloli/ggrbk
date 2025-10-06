@@ -1,7 +1,7 @@
 <template>
-    <v-container>
+    <v-container max-width="750px">
         <v-row class="widgets-grid" align="stretch" dense>
-            <v-col v-for="widget in activeWidgets" :key="widget" cols="12" sm="6" md="4" lg="3">
+            <v-col v-for="widget in activeWidgets" :key="widget" cols="12" sm="6">
                 <component :is="widgetComponents[widget]" />
             </v-col>
         </v-row>

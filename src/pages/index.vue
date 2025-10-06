@@ -1,6 +1,6 @@
 <template>
   <Appbar />
-  <v-container>
+  <v-container max-width="750px">
     <v-row>
       <v-col>
         <v-alert title="検索を開始。" type="info" text="人に聞くのは最終手段です。一通り調べてから聞くようにしましょう。"></v-alert>
@@ -12,7 +12,6 @@
       </v-col>
     </v-row>
   </v-container>
-
   <Widget />
 </template>
 
