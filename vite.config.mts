@@ -49,7 +49,7 @@ export default defineConfig({
         name: 'GooglingGo! Japan',
         short_name: 'G!',
         description: '次世代検索ツール「GGRBK」',
-        theme_color: '#6390D1',
+        theme_color: '#FFFFFF',
         display: 'standalone',
         "icons": [
           {
