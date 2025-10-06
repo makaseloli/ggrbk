@@ -11,5 +11,8 @@ declare module 'vue' {
     Appbar: typeof import('./components/Appbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Timer: typeof import('./components/widgets/Timer.vue')['default']
+    Weather: typeof import('./components/widgets/Weather.vue')['default']
+    Widget: typeof import('./components/Widget.vue')['default']
   }
 }

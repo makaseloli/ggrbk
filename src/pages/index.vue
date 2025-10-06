@@ -7,10 +7,13 @@
         <br>
         <v-select v-model="selectedEngine" :items="Engines" item-title="name" item-value="url"
           label="検索エンジンを選択"></v-select>
-        <v-text-field v-model="searchQuery" append-inner-icon="mdi-magnify" label="検索" @keyup.enter="onSearchSubmit" @click:append-inner="onSearchSubmit"></v-text-field>
+        <v-text-field v-model="searchQuery" append-inner-icon="mdi-magnify" label="検索" @keyup.enter="onSearchSubmit"
+          @click:append-inner="onSearchSubmit"></v-text-field>
       </v-col>
     </v-row>
   </v-container>
+
+  <Widget />
 </template>
 
 <script lang="ts" setup>
