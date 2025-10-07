@@ -3,8 +3,6 @@
   <v-container max-width="750px">
     <v-row>
       <v-col>
-        <v-alert title="検索を開始。" type="info" text="人に聞くのは最終手段です。一通り調べてから聞くようにしましょう。"></v-alert>
-        <br>
         <v-select variant="outlined" v-model="selectedEngine" :items="Engines" item-title="name" item-value="url"
           label="検索エンジンを選択"></v-select>
         <v-text-field variant="outlined" v-model="searchQuery" append-inner-icon="mdi-magnify" label="検索"
