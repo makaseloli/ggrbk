@@ -49,12 +49,6 @@ const probability = ref('')
 const humidity = ref('')
 const weatherCode = ref('')
 
-const openExtService = () => {
-    if (typeof window !== 'undefined') {
-        window.open(`https://www.windy.com/${latlong.value.lat},${latlong.value.lon}`, '_blank')
-    }
-}
-
 const weatherCodes: Record<string, [string, string]> = {
     '0': ['mdi-weather-sunny', 'error'],
     '1': ['mdi-weather-partly-cloudy', 'warning'],
@@ -97,7 +91,6 @@ onMounted(() => {
                 location.value = city || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
             })
             getWeatherData(latitude, longitude).then((weather) => {
-                console.log(weather)
                 temperature.value = weather.hourly.temperature_2m[0].toFixed(1)
                 wind.value = weather.hourly.wind_speed_10m[0].toFixed(1)
                 probability.value = weather.hourly.precipitation_probability[0].toFixed(1)
