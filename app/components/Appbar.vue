@@ -72,8 +72,6 @@ const openGitHub = () => {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,800;1,14..32,800&family=Kaisei+Decol:wght@700&family=Montserrat:ital,wght@0,700;1,700&family=Work+Sans:ital,wght@0,700;1,700&display=swap');
-
 .gg {
     font-family: "Inter", serif;
     color: #4286F5;

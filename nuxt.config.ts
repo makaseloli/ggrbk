@@ -20,6 +20,36 @@ export default defineNuxtConfig({
     },
   },
 
+  fonts: {
+    families: [
+      {
+        name: 'Roboto',
+        weights: [100, 300, 400, 500, 700, 900],
+        styles: ['normal', 'italic']
+      },
+      {
+        name: 'Inter',
+        weights: [800],
+        styles: ['normal', 'italic']
+      },
+      {
+        name: 'Work Sans',
+        weights: [700],
+        styles: ['normal']
+      },
+      {
+        name: 'Montserrat',
+        weights: [700],
+        styles: ['normal']
+      },
+      {
+        name: 'Kaisei Decol',
+        weights: [700],
+        styles: ['normal']
+      }
+    ],
+  },
+
   app: {
     head: {
       htmlAttrs: {
@@ -76,7 +106,7 @@ export default defineNuxtConfig({
   },
 
   css: [],
-  modules: ['vuetify-nuxt-module', '@nuxt/eslint', '@vite-pwa/nuxt'],
+  modules: ['@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint', '@vite-pwa/nuxt'],
 
   vuetify: {
     moduleOptions: {
