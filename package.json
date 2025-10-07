@@ -2,7 +2,7 @@
   "name": "ggrbk-vue",
   "type": "module",
   "private": true,
-  "version": "2.0.3",
+  "version": "2.0.4",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

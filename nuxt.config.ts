@@ -72,7 +72,7 @@ export default defineNuxtConfig({
     },
     manifest: {
       name: 'GooglingGo! Japan',
-      short_name: 'G!',
+      short_name: 'G!JP',
       description: '次世代検索ツール「GooglingGo! Japan」を使って、より効率的に情報を検索しましょう。',
       theme_color: '#FFFFFF',
       display: 'standalone',
