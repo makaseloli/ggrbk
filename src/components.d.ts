@@ -10,6 +10,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     Appbar: typeof import('./components/Appbar.vue')['default']
     Clock: typeof import('./components/widgets/Clock.vue')['default']
+    GGRBK: typeof import('./components/widgets/GGRBK.vue')['default']
+    Quote: typeof import('./components/widgets/Quote.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StopWatch: typeof import('./components/widgets/StopWatch.vue')['default']

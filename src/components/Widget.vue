@@ -38,10 +38,12 @@ import Weather from '@/components/widgets/Weather.vue'
 import Timer from '@/components/widgets/Timer.vue'
 import Clock from '@/components/widgets/Clock.vue'
 import StopWatch from '@/components/widgets/StopWatch.vue'
+import GGRBK from '@/components/widgets/GGRBK.vue'
+import Quote from '@/components/widgets/Quote.vue'
 
 const STORAGE_KEY = 'ggrbk:isActiveWidgets'
 
-const widgets = ['Weather', 'Timer', 'Clock', 'StopWatch'] as const
+const widgets = ['Weather', 'Timer', 'Clock', 'StopWatch', 'GGRBK', 'Quote'] as const
 type WidgetName = typeof widgets[number]
 
 const allWidgets: WidgetName[] = [...widgets]
@@ -50,7 +52,9 @@ const widgetComponents: Record<WidgetName, Component> = {
     Weather,
     Timer,
     Clock,
-    StopWatch
+    StopWatch,
+    GGRBK,
+    Quote,
 }
 
 const isActiveWidgets = ref<WidgetName[]>([])
