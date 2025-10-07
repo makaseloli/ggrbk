@@ -4,13 +4,9 @@
             <v-list v-if="articles.length > 0">
                 <v-list-item v-for="article in articles" :key="article.url" :href="article.url" target="_blank"
                     density="compact" link>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ article.title }}</v-list-item-title>
-                        <v-list-item-subtitle class="text--secondary">{{ article.description }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-icon>
-                        <v-icon icon="mdi-open-in-new" size="16"></v-icon>
-                    </v-list-item-icon>
+                    <v-list-item-title>{{ article.title }}</v-list-item-title>
+                    <v-list-item-subtitle class="text--secondary">{{ article.description }}</v-list-item-subtitle>
+                    <v-icon icon="mdi-open-in-new" size="16"></v-icon>
                 </v-list-item>
             </v-list>
 
@@ -31,14 +27,21 @@ const getArticles = async () => {
     const year = now.getFullYear()
     const month = String(now.getMonth() + 1).padStart(2, '0')
     const day = String(now.getDate()).padStart(2, '0')
-    const res = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/ja/featured/${year}/${month}/${day}`)
+    const url = `https://api.wikimedia.org/feed/v1/wikipedia/ja/featured/${year}/${month}/${day}?origin=${encodeURIComponent(window.location.origin)}`
+    const res = await fetch(url, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    if (!res.ok) {
+        throw new Error(`Failed to fetch featured articles: ${res.status} ${res.statusText}`)
+    }
     const data = await res.json()
-    articles.value = data.mostread.articles.slice(0, 5).map((article: any) => ({
+    articles.value = data.mostread?.articles?.slice(0, 5).map((article: any) => ({
         title: article.title,
         description: article.description,
-        url: `https://ja.wikipedia.org/wiki/${encodeURIComponent(article.title)}`,
-    }))
-    console.log(articles.value)
+        url: `https://ja.wikipedia.org/wiki/${encodeURIComponent(article.title)}`
+    })) ?? []
 }
 
 onMounted(() => {
