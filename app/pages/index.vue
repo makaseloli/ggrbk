@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useHead } from "#app";
 
 const STORAGE_KEY = 'ggrbk:selectedEngine'
 
@@ -27,6 +28,12 @@ const resolveQueryParam = (rawQuery: unknown): string => {
   }
   return typeof rawQuery === 'string' ? rawQuery : ''
 }
+
+const defaultDescription = '次世代検索ツール「GooglingGo! Japan」を使って、より効率的に情報を検索しましょう。'
+const metaDescription = computed(() => {
+  const query = searchQuery.value?.trim()
+  return query ?  query + "🔍" : defaultDescription
+})
 
 const searchQuery = ref(resolveQueryParam(route.query.q))
 const selectedEngine = ref<string | null>(null)
@@ -78,4 +85,10 @@ const onSearchSubmit = () => {
   window.location.href = searchUrl
 }
 
+useHead(() => ({
+  title: 'GooglingGo! Japan',
+  meta: [
+    { property: 'og:description', content: metaDescription.value }
+  ]
+}))
 </script>
