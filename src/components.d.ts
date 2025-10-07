@@ -9,8 +9,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Appbar: typeof import('./components/Appbar.vue')['default']
+    Clock: typeof import('./components/widgets/Clock.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StopWatch: typeof import('./components/widgets/StopWatch.vue')['default']
     Timer: typeof import('./components/widgets/Timer.vue')['default']
     Weather: typeof import('./components/widgets/Weather.vue')['default']
     Widget: typeof import('./components/Widget.vue')['default']

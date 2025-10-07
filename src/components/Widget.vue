@@ -36,17 +36,21 @@ import { computed, onMounted, ref, watch } from 'vue'
 import type { Component } from 'vue'
 import Weather from '@/components/widgets/Weather.vue'
 import Timer from '@/components/widgets/Timer.vue'
+import Clock from '@/components/widgets/Clock.vue'
+import StopWatch from '@/components/widgets/StopWatch.vue'
 
 const STORAGE_KEY = 'ggrbk:isActiveWidgets'
 
-const widgets = ['Weather', 'Timer'] as const
+const widgets = ['Weather', 'Timer', 'Clock', 'StopWatch'] as const
 type WidgetName = typeof widgets[number]
 
 const allWidgets: WidgetName[] = [...widgets]
 
 const widgetComponents: Record<WidgetName, Component> = {
     Weather,
-    Timer
+    Timer,
+    Clock,
+    StopWatch
 }
 
 const isActiveWidgets = ref<WidgetName[]>([])

@@ -1,5 +1,5 @@
 <template>
-    <v-card prepend-icon="mdi-timer-outline" title="タイマー" variant="outlined" height="310px">
+    <v-card prepend-icon="mdi-timer-sand-complete" title="タイマー" variant="outlined" height="310px">
         <v-card-text class="d-flex justify-center">
             <v-progress-circular :model-value="progress" size="150" width="15">
                 <span>{{ formattedNowTime }}</span>
@@ -8,7 +8,7 @@
         <v-card-actions class="d-flex justify-center">
             <v-btn variant="flat" rounded @click="nowTime = setTime; startTimer()">スタート</v-btn>
             <v-number-input variant="filled" inset reverse v-model.number="setTime" label="秒" type="number" style="max-width: 200px;"></v-number-input>
-            <v-btn variant="flat" rounded @click="nowTime = 0">リセット</v-btn>
+            <v-btn variant="flat" rounded @click="nowTime = 0; setTime = 0">リセット</v-btn>
         </v-card-actions>
     </v-card>
 </template>
