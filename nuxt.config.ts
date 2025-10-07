@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'GooglingGo! Japan' },
         { property: 'og:title', content: '検索を開始。' },
-        { property: 'og:image', content: '/logo.png' },
+        { property: 'og:image', content: '/ogp.png' },
       ]
     }
   },

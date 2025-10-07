@@ -1,10 +1,10 @@
 <template>
     <v-card prepend-icon="mdi-clock-outline" title="時計" variant="outlined" height="310px">
-        <v-card-text class="py-0">
-            <v-col class="text-h2 text-center" cols="5.5">
+        <v-card-text class="d-flex justify-center align-center" style="height: calc(100% - 64px);">
+            <div class="text-center px-4 text-h2">
                 {{ hour }}<span class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ minute }}<span
                     class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ second }}
-            </v-col>
+            </div>
         </v-card-text>
     </v-card>
 </template>
