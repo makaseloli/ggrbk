@@ -76,7 +76,7 @@ export default defineNuxtConfig({
   },
 
   css: [],
-  modules: ['@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint', '@vite-pwa/nuxt'],
+  modules: ['vuetify-nuxt-module', '@nuxt/eslint', '@vite-pwa/nuxt'],
 
   vuetify: {
     moduleOptions: {
