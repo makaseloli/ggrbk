@@ -100,9 +100,6 @@ export default defineNuxtConfig({
         }
       ]
     },
-    workbox: {
-      globPatterns: ['**/*.{css,html,ico,js,png,webmanifest}'],
-    },
   },
 
   css: [],

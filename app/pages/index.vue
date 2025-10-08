@@ -52,13 +52,13 @@ const Engines = ref([
   { name: 'Copilot', url: 'https://copilot.microsoft.com/?q=' },
 ])
 
-const defaultEngineUrl = Engines.value[0]?.url ?? null
-
 onMounted(() => {
   if (typeof window === 'undefined') return
 
   const savedEngine = window.localStorage.getItem(STORAGE_KEY)
-  selectedEngine.value = savedEngine ?? defaultEngineUrl
+  if (savedEngine) {
+    selectedEngine.value = savedEngine
+  }
 })
 
 watch(selectedEngine, (newValue) => {
