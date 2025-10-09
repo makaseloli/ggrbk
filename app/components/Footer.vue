@@ -1,10 +1,6 @@
-<script setup lang="ts">
-const config = useRuntimeConfig()
-</script>
-
 <template>
     <USeparator icon="lucide:flag" />
-    <UFooter>
-        <p>Version: {{ config.public.appVersion }}</p>
+    <UFooter class="mb-2">
+        <p>Copyright &copy; 2025 makaseloli BSD 2-Clause License</p>
     </UFooter>
 </template>

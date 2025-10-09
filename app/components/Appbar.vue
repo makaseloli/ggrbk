@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const config = useRuntimeConfig()
+
 const toast = useToast()
 
 const share = ref(false)
@@ -37,8 +39,13 @@ const navItems = ref([
         inset: true,
     }">
         <template #title>
-            <p><span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span
-                    class="ex">!</span><span class="jp"> Japan</span></p>
+            <p class="inline sm:hidden">
+                <span class="gg">G</span><span class="ex">!</span>
+            </p>
+            <p class="hidden sm:inline">
+                <span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span class="ex">!</span><span class="jp"> Japan</span>
+            </p>
+            <UBadge variant="subtle" class="mb-[2px]">v{{ config.public.appVersion }}</UBadge>
         </template>
 
         <UNavigationMenu :items="navItems" />
