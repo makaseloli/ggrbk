@@ -1,13 +1,3 @@
-<template>
-  <NuxtPwaManifest />
-  <v-app>
-    <v-main>
-      <NuxtPage />
-    </v-main>
-  </v-app>
-</template>
-
-
 <script lang="ts" setup>
 import { computed } from '#imports';
 import { useHead, useRouter } from '#app';
@@ -24,3 +14,13 @@ useHead({
   ],
 });
 </script>
+
+
+<template>
+  <NuxtPwaManifest />
+  <UApp>
+    <Appbar />
+    <NuxtPage />
+    <Footer />
+  </UApp>
+</template>

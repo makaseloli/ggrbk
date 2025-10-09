@@ -1,75 +1,64 @@
-<template>
-    <v-app-bar elevation="0">
-        <v-app-bar-title><span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span class="ex">!</span><span class="jp"> Japan</span></v-app-bar-title>
-
-        <v-btn icon="mdi-share-variant-outline" @click="share = true"></v-btn>
-
-        <v-dialog max-width="500">
-            <template v-slot:activator="{ props: activatorProps }">
-                <v-btn icon="mdi-help-circle-outline" v-bind="activatorProps"></v-btn>
-            </template>
-
-            <template v-slot:default="{ isActive }">
-                <v-card prepend-icon="mdi-help-circle-outline" title="ヒント">
-                    <v-card-text>
-                        URLパラメータを使って、検索クエリを指定できます。<br>
-                        例えば、以下のようにURLを指定します。<br>
-                        <code>{{ locationOrigin }}/?q=Vue.js</code><br>
-                        これで、検索ボックスに「Vue.js」が自動的に入力されます。
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn variant="outlined" rounded text="わかった。" @click="isActive.value = false"></v-btn>
-                    </v-card-actions>
-                </v-card>
-            </template>
-        </v-dialog>
-
-        <v-btn icon="mdi-github" @click="openGitHub"></v-btn>
-    </v-app-bar>
-
-    <v-bottom-sheet v-model="share" style="max-width: 500px;">
-        <v-card>
-            <v-card-title>
-                <v-list>
-                    <v-list-subheader title="このサイトを共有する"></v-list-subheader>
-                    <v-list-item title="リンクをコピー" prepend-icon="mdi-link"
-                        @click="copySnackbar = true; share = false; copyHref()"></v-list-item>
-                </v-list>
-            </v-card-title>
-        </v-card>
-    </v-bottom-sheet>
-
-    <v-snackbar v-model="copySnackbar" timeout="1000" location="bottom center">
-        リンクがコピーされました
-        <template v-slot:actions>
-            <v-btn text @click="copySnackbar = false">閉じる</v-btn>
-        </template>
-    </v-snackbar>
-</template>
-
 <script lang="ts" setup>
-import { ref } from 'vue'
-
+const toast = useToast()
 const share = ref(false)
-const copySnackbar = ref(false)
+
 const locationOrigin = typeof window !== 'undefined' ? window.location.origin : ''
 
 const copyHref = async () => {
     try {
         await navigator.clipboard.writeText(window.location.href)
+        toast.add({
+            title: 'URLをコピーしました!',
+            icon: 'lucide:clipboard-copy'
+        })
     } catch (err) {
     }
 }
-
-const openGitHub = () => {
-    if (typeof window !== 'undefined') {
-        window.location.href = 'https://github.com/makaseloli/ggrbk-vue'
-    }
-}
 </script>
+
+<template>
+    <UHeader mode="drawer" :menu="{
+        inset: true,
+    }">
+        <template #title>
+            <p><span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span
+                    class="ex">!</span><span class="jp"> Japan</span></p>
+        </template>
+
+        <template #right>
+            <UColorModeButton />
+
+            <UDrawer v-model:open="share" title="共有する。" inset>
+                <UButton color="neutral" variant="ghost" icon="lucide:share" />
+
+                <template #body>
+                    <UPageList>
+                        <UButton label="URLをコピーする。" color="primary" variant="solid" icon="lucide:clipboard-copy"
+                            @click="copyHref(); share = false" class="my-2" />
+                    </UPageList>
+                </template>
+            </UDrawer>
+
+            <UModal title="ヒント">
+                <UButton color="neutral" variant="ghost" icon="lucide:circle-help" aria-label="Help" />
+
+                <template #body>
+                    URLパラメータを使って、検索クエリを指定できます。<br>
+                    例えば、以下のようにURLを指定します。<br>
+                    <code>{{ locationOrigin }}/?q=Vue.js</code><br>
+                    これで、検索ボックスに「Vue.js」が自動的に入力されます。
+                </template>
+            </UModal>
+
+            <UButton color="neutral" variant="ghost" to="https://github.com/makaseloli/ggrbk" target="_blank"
+                icon="lucide:github" aria-label="GitHub" />
+        </template>
+
+        <template #body>
+            なにもありません...
+        </template>
+    </UHeader>
+</template>
 
 <style>
 .gg {
