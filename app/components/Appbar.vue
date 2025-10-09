@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const toast = useToast()
+
 const share = ref(false)
+const hint = ref(false)
 
 const locationOrigin = typeof window !== 'undefined' ? window.location.origin : ''
 
@@ -14,6 +16,20 @@ const copyHref = async () => {
     } catch (err) {
     }
 }
+
+const navItems = ref([
+    {
+        label: 'ヒント',
+        icon: 'lucide:circle-help',
+        onClick: () => { hint.value = true },
+    },
+    {
+        label: 'GitHub',
+        icon: 'lucide:github',
+        to: 'https://github.com/makaseloli/ggrbk',
+        target: '_blank',
+    }
+])
 </script>
 
 <template>
@@ -25,39 +41,39 @@ const copyHref = async () => {
                     class="ex">!</span><span class="jp"> Japan</span></p>
         </template>
 
+        <UNavigationMenu :items="navItems" />
+
         <template #right>
             <UColorModeButton />
 
-            <UDrawer v-model:open="share" title="共有する。" inset>
-                <UButton color="neutral" variant="ghost" icon="lucide:share" />
 
-                <template #body>
-                    <UPageList>
-                        <UButton label="URLをコピーする。" color="primary" variant="solid" icon="lucide:clipboard-copy"
-                            @click="copyHref(); share = false" class="my-2" />
-                    </UPageList>
-                </template>
-            </UDrawer>
+            <div>
+                <UDrawer v-model:open="share" title="共有する。" inset>
+                    <UButton color="neutral" variant="ghost" icon="lucide:share" />
 
-            <UModal title="ヒント">
-                <UButton color="neutral" variant="ghost" icon="lucide:circle-help" aria-label="Help" />
-
-                <template #body>
-                    URLパラメータを使って、検索クエリを指定できます。<br>
-                    例えば、以下のようにURLを指定します。<br>
-                    <code>{{ locationOrigin }}/?q=Vue.js</code><br>
-                    これで、検索ボックスに「Vue.js」が自動的に入力されます。
-                </template>
-            </UModal>
-
-            <UButton color="neutral" variant="ghost" to="https://github.com/makaseloli/ggrbk" target="_blank"
-                icon="lucide:github" aria-label="GitHub" />
+                    <template #body>
+                        <UPageList>
+                            <UButton label="URLをコピーする。" color="primary" variant="solid" icon="lucide:clipboard-copy"
+                                @click="copyHref(); share = false" class="my-2" />
+                        </UPageList>
+                    </template>
+                </UDrawer>
+            </div>
         </template>
 
         <template #body>
-            なにもありません...
+            <UNavigationMenu :items="navItems" orientation="vertical" class="my-2" />
         </template>
     </UHeader>
+
+    <UModal v-model:open="hint" title="ヒント">
+        <template #body>
+            URLパラメータを使って、検索クエリを指定できます。<br>
+            例えば、以下のようにURLを指定します。<br>
+            <code>{{ locationOrigin }}/?q=Vue.js</code><br>
+            これで、検索ボックスに「Vue.js」が自動的に入力されます。
+        </template>
+    </UModal>
 </template>
 
 <style>

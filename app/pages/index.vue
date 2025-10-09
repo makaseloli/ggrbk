@@ -85,7 +85,7 @@ useHead(() => ({
       <template #header>
         <h2 class="text-2xl font-bold text-center">検索を開始。</h2>
       </template>
-      <UPageList class="space-y-8">
+      <UPageList class="space-y-6">
         <USelect v-model="selectedEngine" :items="Engines" item-text="label" placeholder="検索エンジンを選択。" />
         <UInput v-model="searchQuery" placeholder="検索ワードを入力。" trailing-icon="lucide:search" @keyup.enter="onSearchSubmit" @click:trailing-icon="onSearchSubmit" />
       </UPageList>
