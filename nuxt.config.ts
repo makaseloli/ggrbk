@@ -1,32 +1,11 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import pkg from './package.json';
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   ssr: true,
-
-  // when enabling ssr option you need to disable inlineStyles and maybe devLogs
-  features: {
-    inlineStyles: false,
-    devLogs: false,
-  },
-
-  build: {
-    transpile: ['vuetify'],
-  },
-
-  vite: {
-    ssr: {
-      noExternal: ['vuetify'],
-    },
-  },
-
   fonts: {
     families: [
-      {
-        name: 'Roboto',
-        weights: [100, 300, 400, 500, 700, 900],
-        styles: ['normal', 'italic']
-      },
       {
         name: 'Inter',
         weights: [800],
@@ -49,7 +28,6 @@ export default defineNuxtConfig({
       }
     ],
   },
-
   app: {
     head: {
       htmlAttrs: {
@@ -63,7 +41,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-
   pwa: {
     registerType: 'autoUpdate',
     devOptions: {
@@ -72,8 +49,9 @@ export default defineNuxtConfig({
     },
     manifest: {
       name: 'GooglingGo! Japan',
-      short_name: 'G!JP',
+      short_name: 'G! Japan',
       description: '次世代検索ツール「GooglingGo! Japan」を使って、より効率的に情報を検索しましょう。',
+      lang: 'ja',
       theme_color: '#FFFFFF',
       display: 'standalone',
       "icons": [
@@ -101,28 +79,11 @@ export default defineNuxtConfig({
       ]
     },
   },
-
-  css: [],
-  modules: ['@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint', '@vite-pwa/nuxt'],
-
-  vuetify: {
-    moduleOptions: {
-      // check https://nuxt.vuetifyjs.com/guide/server-side-rendering.html
-      ssrClientHints: {
-        reloadOnFirstRequest: false,
-        viewportSize: true,
-        prefersColorScheme: false,
-
-        prefersColorSchemeOptions: {
-          useBrowserThemeOnly: false,
-        },
-      },
-
-      // /* If customizing sass global variables ($utilities, $reset, $color-pack, $body-font-family, etc) */
-      // disableVuetifyStyles: true,
-      styles: {
-        configFile: 'assets/settings.scss',
-      },
-    },
+  runtimeConfig: {
+    public: {
+      appVersion: pkg.version
+    }
   },
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@vite-pwa/nuxt'],
+  css: ['~/assets/css/main.css']
 })

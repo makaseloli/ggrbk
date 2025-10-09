@@ -1,14 +1,3 @@
-<template>
-    <v-card prepend-icon="mdi-clock-outline" title="時計" variant="outlined" height="310px">
-        <v-card-text class="d-flex justify-center align-center" style="height: calc(100% - 64px);">
-            <div class="text-center px-4 text-h2">
-                {{ hour }}<span class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ minute }}<span
-                    class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ second }}
-            </div>
-        </v-card-text>
-    </v-card>
-</template>
-
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -57,6 +46,17 @@ onUnmounted(() => {
     }
 })
 </script>
+
+<template>
+    <UPageCard class="h-[310px]">
+        <div class="flex flex-col justify-center h-full">
+            <p class="text-center text-h2 text-4xl font-mono">
+                {{ hour }}<span class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ minute }}<span
+                    class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ second }}
+            </p>
+        </div>
+    </UPageCard>
+</template>
 
 <style scoped>
 .dot {

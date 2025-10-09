@@ -1,22 +1,3 @@
-<template>
-    <v-card prepend-icon="mdi-star-outline" title="今アツい記事" variant="outlined" height="310px">
-        <v-card-text class="py-0" style="height: calc(100% - 64px); overflow-y: auto;">
-            <v-list v-if="articles.length > 0">
-                <v-list-item v-for="article in articles" :key="article.url" :href="article.url" target="_blank"
-                    density="compact" link>
-                    <v-list-item-title>{{ article.title }}</v-list-item-title>
-                    <v-list-item-subtitle class="text--secondary">{{ article.description }}</v-list-item-subtitle>
-                    <v-icon icon="mdi-open-in-new" size="16"></v-icon>
-                </v-list-item>
-            </v-list>
-
-            <div v-else class="d-flex justify-center align-center" style="height: 100%;">
-                <v-progress-circular indeterminate size="40"></v-progress-circular>
-            </div>
-        </v-card-text>
-    </v-card>
-</template>
-
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
@@ -48,3 +29,27 @@ onMounted(() => {
     getArticles()
 })
 </script>
+
+<template>
+    <UPageCard class="h-[310px] overflow-y-auto">
+        <UPageList>
+          <div class="flex flex-col justify-center h-full">
+            <div v-if="articles.length === 0" class="text-center text-gray-500 dark:text-gray-400">
+                記事を取得中...
+                <UProgress animation="swing" class="mx-auto mt-4" />
+            </div>
+            <div v-else>
+                <div v-for="article in articles" :key="article.url" class="mb-4">
+                    <ULink :href="article.url" target="_blank" rel="noopener noreferrer" class="text-lg font-medium hover:underline">
+                        {{ article.title }}
+                        <UIcon name="lucide:external-link" class="size-4" />
+                    </ULink>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        {{ article.description }}
+                    </p>
+                </div>
+            </div>
+        </div>          
+        </UPageList>
+    </UPageCard>
+</template>

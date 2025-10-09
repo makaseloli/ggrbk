@@ -1,22 +1,8 @@
-<template>
-  <Appbar />
-  <v-container max-width="750px">
-    <v-row>
-      <v-col>
-        <v-select variant="outlined" v-model="selectedEngine" :items="Engines" item-title="name" item-value="url"
-          label="検索エンジンを選択"></v-select>
-        <v-text-field variant="outlined" v-model="searchQuery" append-inner-icon="mdi-magnify" label="検索"
-          @keyup.enter="onSearchSubmit" @click:append-inner="onSearchSubmit"></v-text-field>
-      </v-col>
-    </v-row>
-  </v-container>
-  <Widget />
-</template>
-
 <script lang="ts" setup>
 import { onMounted, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from "#app";
+import type { SelectItem } from '@nuxt/ui'
 
 const STORAGE_KEY = 'ggrbk:selectedEngine'
 
@@ -32,24 +18,24 @@ const resolveQueryParam = (rawQuery: unknown): string => {
 const defaultDescription = '次世代検索ツール「GooglingGo! Japan」を使って、より効率的に情報を検索しましょう。'
 const metaDescription = computed(() => {
   const query = searchQuery.value?.trim()
-  return query ?  query + "🔍" : defaultDescription
+  return query ? query + "🔍" : defaultDescription
 })
 
 const searchQuery = ref(resolveQueryParam(route.query.q))
-const selectedEngine = ref<string | null>(null)
-const Engines = ref([
-  { name: 'Google', url: 'https://www.google.com/search?q=' },
-  { name: 'Bing', url: 'https://www.bing.com/search?q=' },
-  { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=' },
-  { name: 'Yahoo!', url: 'https://search.yahoo.com/search?p=' },
-  { name: 'Yahoo! Japan', url: 'https://search.yahoo.co.jp/search?p=' },
-  { name: 'Ecosia', url: 'https://www.ecosia.org/search?q=' },
-  { name: 'Brave', url: 'https://search.brave.com/search?q=' },
-  { name: 'Startpage', url: 'https://www.startpage.com/do/dsearch?query=' },
-  { name: 'Karama', url: 'https://karmasearch.org/search?q=' },
-  { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=' },
-  { name: 'ChatGPT', url: 'https://chatgpt.com/?q=' },
-  { name: 'Copilot', url: 'https://copilot.microsoft.com/?q=' },
+const selectedEngine = ref<string | undefined>(undefined)
+const Engines = ref<SelectItem[]>([
+  { label: 'Google', value: 'https://www.google.com/search?q=' },
+  { label: 'Bing', value: 'https://www.bing.com/search?q=' },
+  { label: 'DuckDuckGo', value: 'https://duckduckgo.com/?q=' },
+  { label: 'Yahoo!', value: 'https://search.yahoo.com/search?p=' },
+  { label: 'Yahoo! Japan', value: 'https://search.yahoo.co.jp/search?p=' },
+  { label: 'Ecosia', value: 'https://www.ecosia.org/search?q=' },
+  { label: 'Brave', value: 'https://search.brave.com/search?q=' },
+  { label: 'Startpage', value: 'https://www.startpage.com/do/dsearch?query=' },
+  { label: 'Karama', value: 'https://karmasearch.org/search?q=' },
+  { label: 'Perplexity', value: 'https://www.perplexity.ai/search?q=' },
+  { label: 'ChatGPT', value: 'https://chatgpt.com/?q=' },
+  { label: 'Copilot', value: 'https://copilot.microsoft.com/?q=' },
 ])
 
 onMounted(() => {
@@ -92,3 +78,18 @@ useHead(() => ({
   ]
 }))
 </script>
+
+<template>
+  <UContainer class="mx-auto my-8 max-w-[750px]">
+    <UCard>
+      <template #header>
+        <h2 class="text-2xl font-bold text-center">検索を開始。</h2>
+      </template>
+      <UPageList class="space-y-8">
+        <USelect v-model="selectedEngine" :items="Engines" item-text="label" placeholder="検索エンジンを選択。" />
+        <UInput v-model="searchQuery" placeholder="検索ワードを入力。" trailing-icon="lucide:search" @keyup.enter="onSearchSubmit" @click:trailing-icon="onSearchSubmit" />
+      </UPageList>
+    </UCard>
+  </UContainer>
+  <Widget />
+</template>

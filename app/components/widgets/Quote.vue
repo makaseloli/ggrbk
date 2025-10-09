@@ -1,14 +1,3 @@
-<template>
-    <v-card prepend-icon="mdi-format-quote-open-outline" title="名言" variant="outlined" height="310px">
-        <v-card-text class="d-flex justify-center align-center" style="height: calc(100% - 64px);">
-            <div class="text-center px-4" v-if="selectedQuote">
-                <p class="text-h6 mb-4">"{{ selectedQuote.text }}"</p>
-                <p class="text-subtitle-1">- {{ selectedQuote.author }}</p>
-            </div>
-        </v-card-text>
-    </v-card>
-</template>
-
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
@@ -64,3 +53,15 @@ onMounted(() => {
     pickRandomQuote()
 })
 </script>
+
+
+<template>
+    <UPageCard class="h-[310px]">
+        <div class="flex flex-col justify-center h-full">
+            <div class="text-center px-4" v-if="selectedQuote">
+                <p class="text-h2 text-xl mb-4">"{{ selectedQuote.text }}"</p>
+                <p class="text-subtitle-1">- {{ selectedQuote.author }}</p>
+            </div>
+        </div>
+    </UPageCard>
+</template>

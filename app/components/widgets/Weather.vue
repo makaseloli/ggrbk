@@ -1,43 +1,3 @@
-<template>
-    <v-card v-if="!location && !temperature" variant="outlined" height="310px">
-        <v-skeleton-loader type="article"></v-skeleton-loader>
-    </v-card>
-    <v-card v-else prepend-icon="mdi-map-marker-outline" :title="location" append-icon="mdi-open-in-new"
-        :href="`https://www.windy.com/?${latlong.lat},${latlong.lon},10`" target="_blank" variant="outlined"
-        height="310px">
-        <v-card-text class="py-0">
-            <v-row align="center" no-gutters>
-                <v-col class="text-h2" cols="5.5">
-                    {{ temperature }}&deg;C
-                </v-col>
-
-                <v-col class="text-right" cols="5.5">
-                    <v-icon :color="currentWeatherColor" :icon="currentWeatherIcon" size="88"></v-icon>
-                </v-col>
-            </v-row>
-        </v-card-text>
-
-        <div class="py-3">
-            <v-list-item density="compact" prepend-icon="mdi-weather-windy">
-                <v-list-item-subtitle>{{ wind }} km/h</v-list-item-subtitle>
-            </v-list-item>
-
-            <v-list-item density="compact" prepend-icon="mdi-weather-pouring">
-                <v-list-item-subtitle>{{ probability }}%</v-list-item-subtitle>
-            </v-list-item>
-
-            <v-list-item density="compact" prepend-icon="mdi-water-percent">
-                <v-list-item-subtitle>{{ humidity }}%</v-list-item-subtitle>
-            </v-list-item>
-        </div>
-
-        <v-divider></v-divider>
-        <v-list-item density="compact" prepend-icon="mdi-weather-sunset">
-            <v-list-item-subtitle>Powered by Open-Meteo</v-list-item-subtitle>
-        </v-list-item>
-    </v-card>
-</template>
-
 <script lang="ts" setup>
 import { ref, onMounted, h, computed } from 'vue'
 
@@ -50,15 +10,37 @@ const humidity = ref('')
 const weatherCode = ref('')
 
 const weatherCodes: Record<string, [string, string]> = {
-    '0': ['mdi-weather-sunny', 'error'],
-    '1': ['mdi-weather-partly-cloudy', 'warning'],
-    '2': ['mdi-weather-cloudy', 'info'],
-    '3': ['mdi-weather-overcast', 'info'],
-    '45': ['mdi-weather-fog', 'success'],
-    '48': ['mdi-weather-fog', 'success'],
+    '0': ['lucide:sun', 'error'],
+    '1': ['lucide:sun-medium', 'warning'],
+    '2': ['lucide:cloud-sun', 'warning'],
+    '3': ['lucide:cloudy', 'info'],
+    '45': ['lucide:cloud-fog', 'success'],
+    '48': ['lucide:cloud-fog', 'success'],
+    '51': ['lucide:cloud-drizzle', 'info'],
+    '53': ['lucide:cloud-drizzle', 'info'],
+    '55': ['lucide:cloud-drizzle', 'info'],
+    '56': ['lucide:cloud-snow', 'info'],
+    '57': ['lucide:cloud-snow', 'info'],
+    '61': ['lucide:cloud-rain', 'info'],
+    '63': ['lucide:cloud-rain', 'info'],
+    '65': ['lucide:cloud-rain', 'info'],
+    '66': ['lucide:cloud-snow', 'info'],
+    '67': ['lucide:cloud-snow', 'info'],
+    '71': ['lucide:snowflake', 'info'],
+    '73': ['lucide:snowflake', 'info'],
+    '75': ['lucide:snowflake', 'info'],
+    '77': ['lucide:snowflake', 'info'],
+    '80': ['lucide:cloud-rain', 'info'],
+    '81': ['lucide:cloud-rain', 'info'],
+    '82': ['lucide:cloud-rain', 'info'],
+    '85': ['lucide:cloud-snow', 'info'],
+    '86': ['lucide:cloud-snow', 'info'],
+    '95': ['lucide:cloud-lightning', 'warning'],
+    '96': ['lucide:cloud-lightning', 'warning'],
+    '99': ['lucide:cloud-lightning', 'warning']
 }
 
-const currentWeatherIcon = computed(() => weatherCodes[weatherCode.value]?.[0] || 'mdi-help-circle')
+const currentWeatherIcon = computed(() => weatherCodes[weatherCode.value]?.[0] || 'lucide:circle-question-mark')
 const currentWeatherColor = computed(() => weatherCodes[weatherCode.value]?.[1] || 'info')
 
 const getLocalCity = async (lat: number, lon: number) => {
@@ -82,7 +64,6 @@ const getWeatherData = async (lat: number, lon: number) => {
 
 onMounted(() => {
     if (typeof window === 'undefined') return
-
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             const { latitude, longitude } = pos.coords;
@@ -103,3 +84,24 @@ onMounted(() => {
     );
 })
 </script>
+
+<template>
+    <UPageCard class="h-[310px]">
+        <div class="flex flex-col justify-center h-full">
+            <div v-if="!location || !temperature || !currentWeatherIcon"
+                class="text-center text-gray-500 dark:text-gray-400">
+                情報を取得中...
+                <UProgress animation="swing" class="mx-auto mt-4" />
+            </div>
+            <div v-else>
+                <UIcon :name="currentWeatherIcon" :class="`size-12 mb-2 text-${currentWeatherColor}`" />
+                <p class="text-4xl mb-4">{{ location }} {{ temperature }}°C</p>
+                <div class="space-y-2">
+                    <UUser :name="`${wind} m/s`" :avatar="{icon: 'lucide:wind'}"/>
+                    <UUser :name="`${probability}%`" :avatar="{icon: 'lucide:cloud-rain'}"/>
+                    <UUser :name="`${humidity}%`" :avatar="{icon: 'lucide:circle-percent'}"/>
+                </div>
+            </div>
+        </div>
+    </UPageCard>
+</template>

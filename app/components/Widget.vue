@@ -1,63 +1,28 @@
-<template>
-    <v-container max-width="750px">
-        <v-row class="widgets-grid" align="stretch" dense>
-            <v-col v-for="widget in activeWidgets" :key="widget" cols="12" sm="6">
-                <component :is="widgetComponents[widget]" />
-            </v-col>
-        </v-row>
-        <br>
-        <v-dialog max-width="500">
-            <template v-slot:activator="{ props: activatorProps }">
-                <v-btn variant="outlined" rounded v-bind="activatorProps"><v-icon>mdi-pencil</v-icon>カスタマイズ</v-btn>
-            </template>
-
-            <template v-slot:default="{ isActive }">
-                <v-card prepend-icon="mdi-pencil" title="ウィジェットのカスタマイズ">
-                    <v-card-text>
-                        <div v-for="widget in widgets" :key="widget">
-                            <v-checkbox :label="widget" :value="widget" v-model="isActiveWidgets" density="compact"
-                                hide-details></v-checkbox>
-                        </div>
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn variant="outlined" rounded text="閉じる" @click="isActive.value = false"></v-btn>
-                    </v-card-actions>
-                </v-card>
-            </template>
-        </v-dialog>
-    </v-container>
-</template>
-
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, onMounted, ref, watch } from 'vue'
 import type { Component } from 'vue'
-import Weather from '@/components/widgets/Weather.vue'
-import Timer from '@/components/widgets/Timer.vue'
-import Clock from '@/components/widgets/Clock.vue'
-import StopWatch from '@/components/widgets/StopWatch.vue'
-import GGRBK from '@/components/widgets/GGRBK.vue'
-import Quote from '@/components/widgets/Quote.vue'
-import Article from '@/components/widgets/Article.vue'
 
 const STORAGE_KEY = 'ggrbk:isActiveWidgets'
 
-const widgets = ['Weather', 'Timer', 'Clock', 'StopWatch', 'GGRBK', 'Quote', 'Article'] as const
-type WidgetName = typeof widgets[number]
+defineOptions({
+    name: 'WidgetsPanel'
+})
 
-const allWidgets: WidgetName[] = [...widgets]
+const widgets = [
+    { name: '天気', loader: () => import('@/components/widgets/Weather.vue') },
+    { name: '時計', loader: () => import('@/components/widgets/Clock.vue') },
+    { name: '名言', loader: () => import('@/components/widgets/Quote.vue') },
+    { name: '今アツい記事', loader: () => import('@/components/widgets/Article.vue') }
+] as const
 
-const widgetComponents: Record<WidgetName, Component> = {
-    Weather,
-    Timer,
-    Clock,
-    StopWatch,
-    GGRBK,
-    Quote,
-    Article,
-}
+type WidgetName = typeof widgets[number]['name']
+
+const allWidgets: WidgetName[] = widgets.map(({ name }) => name) as WidgetName[]
+
+const widgetComponents = widgets.reduce<Record<WidgetName, Component>>((acc, { name, loader }) => {
+    acc[name] = defineAsyncComponent(loader)
+    return acc
+}, {} as Record<WidgetName, Component>)
 
 const isActiveWidgets = ref<WidgetName[]>([])
 
@@ -112,4 +77,19 @@ watch(
 
 </script>
 
-<style scoped></style>
+<template>
+    <UContainer class="mx-auto my-8 max-w-[750px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <template v-for="widgetName in activeWidgets" :key="widgetName">
+                <component :is="widgetComponents[widgetName]" />
+            </template>
+        </div>
+        <UDrawer title="ウィジェットを追加。" inset>
+            <UButton label="カスタマイズする。" color="primary" variant="solid" icon="lucide:pencil" />
+
+            <template #body>
+                <UCheckboxGroup v-model="isActiveWidgets" :items="allWidgets" class="my-2" />
+            </template>
+        </UDrawer>
+    </UContainer>
+</template>
