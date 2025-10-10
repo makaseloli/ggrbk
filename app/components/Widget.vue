@@ -12,7 +12,8 @@ const widgets = [
     { name: '天気', loader: () => import('@/components/widgets/Weather.vue') },
     { name: '時計', loader: () => import('@/components/widgets/Clock.vue') },
     { name: '名言', loader: () => import('@/components/widgets/Quote.vue') },
-    { name: '今アツい記事', loader: () => import('@/components/widgets/Article.vue') }
+    { name: '今アツい記事', loader: () => import('@/components/widgets/Article.vue') },
+    { name: 'ライフゲーム', loader: () => import('@/components/widgets/Lifegame.vue') }
 ] as const
 
 type WidgetName = typeof widgets[number]['name']
