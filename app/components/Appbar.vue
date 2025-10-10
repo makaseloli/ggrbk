@@ -5,6 +5,7 @@ const toast = useToast()
 
 const share = ref(false)
 const hint = ref(false)
+const settings = ref(false)
 
 const locationOrigin = typeof window !== 'undefined' ? window.location.origin : ''
 
@@ -43,7 +44,8 @@ const navItems = ref([
                 <span class="gg">G</span><span class="ex">!</span>
             </p>
             <p class="hidden sm:inline">
-                <span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span class="ex">!</span><span class="jp"> Japan</span>
+                <span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span
+                    class="ex">!</span><span class="jp"> Japan</span>
             </p>
             <UBadge variant="subtle" class="mb-[2px]">v{{ config.public.appVersion }}</UBadge>
         </template>
@@ -51,8 +53,7 @@ const navItems = ref([
         <UNavigationMenu :items="navItems" />
 
         <template #right>
-            <UColorModeButton />
-
+            <UButton color="neutral" variant="ghost" icon="lucide:settings" @click="settings = true" />
 
             <div>
                 <UDrawer v-model:open="share" title="共有する。" inset>
@@ -79,6 +80,16 @@ const navItems = ref([
             例えば、以下のようにURLを指定します。<br>
             <code>{{ locationOrigin }}/?q=Vue.js</code><br>
             これで、検索ボックスに「Vue.js」が自動的に入力されます。
+        </template>
+    </UModal>
+
+    <UModal v-model:open="settings" title="設定">
+        <template #body>
+            <UPageCard title="ビジュアル">
+                <UPageList>
+                    <UColorModeButton label="ライト/ダーク"/>
+                </UPageList>
+            </UPageCard>
         </template>
     </UModal>
 </template>

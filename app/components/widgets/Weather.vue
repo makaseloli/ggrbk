@@ -90,7 +90,7 @@ onMounted(() => {
         <div class="flex flex-col justify-center h-full">
             <div v-if="!location || !temperature || !currentWeatherIcon"
                 class="text-center text-gray-500 dark:text-gray-400">
-                情報を取得中...
+                天気を取得中...
                 <UProgress animation="swing" class="mx-auto mt-4" />
             </div>
             <div v-else>
