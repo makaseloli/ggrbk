@@ -71,7 +71,7 @@ const countLiveNeighbors = (row: number, col: number) => {
 }
 
 
-function startSimulation() {
+const startSimulation = () => {
     if (isRunning.value) return
     isRunning.value = true
     intervalId = setInterval(() => {

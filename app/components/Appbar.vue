@@ -6,8 +6,26 @@ const toast = useToast()
 const share = ref(false)
 const hint = ref(false)
 const settings = ref(false)
+const changelog = ref(false)
 
 const locationOrigin = typeof window !== 'undefined' ? window.location.origin : ''
+
+onMounted(() => {
+    if (typeof window !== 'undefined') {
+        const currentVersion = config.public.appVersion
+        const lastVersion = localStorage.getItem('ggrbk:appVersion')
+        if (!lastVersion || lastVersion !== currentVersion) {
+            toast.add({
+                title: 'アプリが' + currentVersion + 'に更新されました!',
+                icon: 'lucide:trending-up',
+                onClick: () => {
+                    changelog.value = true
+                }                
+            })
+        }
+        localStorage.setItem('ggrbk:appVersion', currentVersion)
+    }
+})
 
 const copyHref = async () => {
     try {
@@ -47,7 +65,7 @@ const navItems = ref([
                 <span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span
                     class="ex">!</span><span class="jp"> Japan</span>
             </p>
-            <UBadge variant="subtle" class="mb-[2px]">v{{ config.public.appVersion }}</UBadge>
+            <UBadge variant="subtle" class="mb-[2px]" @click="changelog = true">v{{ config.public.appVersion }}</UBadge>
         </template>
 
         <UNavigationMenu :items="navItems" />
@@ -87,9 +105,15 @@ const navItems = ref([
         <template #body>
             <UPageCard title="ビジュアル">
                 <UPageList>
-                    <UColorModeButton label="ライト/ダーク"/>
+                    <UColorModeButton label="ライト/ダーク" />
                 </UPageList>
             </UPageCard>
+        </template>
+    </UModal>
+
+    <UModal v-model:open="changelog" title="更新履歴">
+        <template #body>
+            <Changelog />
         </template>
     </UModal>
 </template>
