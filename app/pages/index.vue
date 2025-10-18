@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch, computed } from 'vue'
+import type { CSSProperties } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from "#app";
 import type { SelectItem } from '@nuxt/ui'
 
-const STORAGE_KEY = 'ggrbk:selectedEngine'
+const ENGINE_KEY = 'ggrbk:selectedEngine'
+const BG_KEY = 'ggrbk:backgroundImage'
 
 const route = useRoute()
 
@@ -22,6 +24,7 @@ const metaDescription = computed(() => {
 })
 
 const searchQuery = ref(resolveQueryParam(route.query.q))
+const backgroundImage = useState<string | null>('backgroundImage', () => null)
 const selectedEngine = ref<string | undefined>(undefined)
 const Engines = ref<SelectItem[]>([
   { label: 'Google', value: 'https://www.google.com/search?q=' },
@@ -41,19 +44,21 @@ const Engines = ref<SelectItem[]>([
 onMounted(() => {
   if (typeof window === 'undefined') return
 
-  const savedEngine = window.localStorage.getItem(STORAGE_KEY)
+  const savedEngine = window.localStorage.getItem(ENGINE_KEY)
   if (savedEngine) {
     selectedEngine.value = savedEngine
   }
+
+  backgroundImage.value = window.localStorage.getItem(BG_KEY)
 })
 
 watch(selectedEngine, (newValue) => {
   if (typeof window === 'undefined') return
 
   if (newValue) {
-    window.localStorage.setItem(STORAGE_KEY, newValue)
+    window.localStorage.setItem(ENGINE_KEY, newValue)
   } else {
-    window.localStorage.removeItem(STORAGE_KEY)
+    window.localStorage.removeItem(ENGINE_KEY)
   }
 })
 
@@ -77,6 +82,22 @@ useHead(() => ({
     { property: 'og:description', content: metaDescription.value }
   ]
 }))
+
+const backgroundStyle = computed<CSSProperties>(() => {
+  if (!backgroundImage.value) {
+    return {}
+  }
+
+  return {
+    backgroundImage: `url(${backgroundImage.value})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'fixed',
+    inset: '0',
+    zIndex: -1,
+    opacity: 0.3
+  }
+})
 </script>
 
 <template>
@@ -87,9 +108,11 @@ useHead(() => ({
       </template>
       <UPageList class="space-y-6">
         <USelect v-model="selectedEngine" :items="Engines" item-text="label" placeholder="検索エンジンを選択。" />
-        <UInput v-model="searchQuery" placeholder="検索ワードを入力。" trailing-icon="lucide:search" @keyup.enter="onSearchSubmit" @click:trailing-icon="onSearchSubmit" />
+        <UInput v-model="searchQuery" placeholder="検索ワードを入力。" trailing-icon="lucide:search"
+          @keyup.enter="onSearchSubmit" @click:trailing-icon="onSearchSubmit" />
       </UPageList>
     </UCard>
   </UContainer>
   <Widget />
+  <div :style="backgroundStyle"></div>
 </template>

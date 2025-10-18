@@ -105,7 +105,12 @@ const navItems = ref([
         <template #body>
             <UPageCard title="ビジュアル">
                 <UPageList>
-                    <UColorModeButton label="ライト/ダーク" />
+                    <p>テーマ</p>
+                    <UColorModeSelect />
+                    <p class="mt-2">色</p>
+                    <SettingsColorMode />
+                    <p class="mt-2">壁紙</p>
+                    <SettingsBgImage />
                 </UPageList>
             </UPageCard>
         </template>
