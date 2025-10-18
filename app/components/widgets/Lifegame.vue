@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <UPageCard class="h-[310px]">
+    <UPageCard class="h-[310px] bg-default/60 backdrop-blur">
         <div ref="gridContainer" class="h-full w-full overflow-auto flex flex-col justify-center align-center">
             <table>
                 <tbody>

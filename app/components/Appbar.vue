@@ -56,7 +56,7 @@ const navItems = ref([
 <template>
     <UHeader mode="drawer" :menu="{
         inset: true,
-    }">
+    }" class="bg-default/60">
         <template #title>
             <p class="inline sm:hidden">
                 <span class="gg">G</span><span class="ex">!</span>

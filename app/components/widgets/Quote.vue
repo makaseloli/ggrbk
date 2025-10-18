@@ -56,7 +56,7 @@ onMounted(() => {
 
 
 <template>
-    <UPageCard class="h-[310px]">
+    <UPageCard class="h-[310px] bg-default/60 backdrop-blur">
         <div class="flex flex-col justify-center h-full">
             <div class="text-center px-4" v-if="selectedQuote">
                 <p class="text-h2 text-xl mb-4">"{{ selectedQuote.text }}"</p>

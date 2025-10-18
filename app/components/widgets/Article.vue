@@ -32,7 +32,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <UPageCard class="h-[310px] overflow-y-auto">
+    <UPageCard class="h-[310px] overflow-y-auto bg-default/60 backdrop-blur">
         <div v-if="articles.length === 0" class="flex flex-col justify-center h-full">
             <div class="text-center text-gray-500 dark:text-gray-400">
                 記事を取得中...

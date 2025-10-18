@@ -86,7 +86,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <UPageCard class="h-[310px]">
+    <UPageCard class="h-[310px] bg-default/60 backdrop-blur">
         <div class="flex flex-col justify-center h-full">
             <div v-if="!location || !temperature || !currentWeatherIcon"
                 class="text-center text-gray-500 dark:text-gray-400">

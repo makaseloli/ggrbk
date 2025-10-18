@@ -102,7 +102,7 @@ const backgroundStyle = computed<CSSProperties>(() => {
 
 <template>
   <UContainer class="mx-auto my-8 max-w-[750px]">
-    <UCard>
+    <UCard class="bg-default/60 backdrop-blur">
       <template #header>
         <h2 class="text-2xl font-bold text-center">検索を開始。</h2>
       </template>

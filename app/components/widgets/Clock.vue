@@ -48,7 +48,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <UPageCard class="h-[310px]">
+    <UPageCard class="h-[310px] bg-default/60 backdrop-blur">
         <div class="flex flex-col justify-center h-full">
             <p class="text-center text-h2 text-4xl font-mono">
                 {{ hour }}<span class="dot" :class="{ 'dot--visible': isColonVisible }">:</span>{{ minute }}<span

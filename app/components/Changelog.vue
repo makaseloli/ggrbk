@@ -4,6 +4,12 @@ import type { TimelineItem } from '@nuxt/ui'
 const items = ref<TimelineItem[]>([
     {
         date: '2025/10/18',
+        title: '3.4.1',
+        description: '全てのカードにぼかし効果を追加。',
+        icon: 'lucide:waves'
+    },
+    {
+        date: '2025/10/18',
         title: '3.4.0',
         description: 'アプリのカラーモード設定と壁紙機能を追加。',
         icon: 'lucide:paintbrush'
