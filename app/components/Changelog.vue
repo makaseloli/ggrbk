@@ -4,6 +4,12 @@ import type { TimelineItem } from '@nuxt/ui'
 const items = ref<TimelineItem[]>([
     {
         date: '2025/10/18',
+        title: '3.3.1',
+        description: 'バージョンの表記方法を統一。',
+        icon: 'lucide:hash'
+    },
+    {
+        date: '2025/10/18',
         title: '3.3.0',
         description: '更新情報を表示する機能を追加。',
         icon: 'lucide:history'

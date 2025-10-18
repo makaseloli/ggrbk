@@ -65,7 +65,7 @@ const navItems = ref([
                 <span class="gg">Googl</span><span class="bg">ing</span><span class="go">Go</span><span
                     class="ex">!</span><span class="jp"> Japan</span>
             </p>
-            <UBadge variant="subtle" class="mb-[2px]" @click="changelog = true">v{{ config.public.appVersion }}</UBadge>
+            <UBadge variant="subtle" class="mb-[2px]" @click="changelog = true">{{ config.public.appVersion }}</UBadge>
         </template>
 
         <UNavigationMenu :items="navItems" />
