@@ -113,6 +113,9 @@ const navItems = ref([
                     <SettingsBgImage />
                 </UPageList>
             </UPageCard>
+            <UPageCard title="設定のエクスポート" class="mt-4">
+                <SettingsExportImport />
+            </UPageCard>
         </template>
     </UModal>
 

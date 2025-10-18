@@ -4,6 +4,12 @@ import type { TimelineItem } from '@nuxt/ui'
 const items = ref<TimelineItem[]>([
     {
         date: '2025/10/18',
+        title: '3.5.0',
+        description: '設定のエクスポート/インポート機能を追加。',
+        icon: 'lucide:package-open'
+    },
+    {
+        date: '2025/10/18',
         title: '3.4.1',
         description: '全てのカードにぼかし効果を追加。',
         icon: 'lucide:waves'
