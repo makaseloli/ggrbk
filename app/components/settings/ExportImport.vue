@@ -166,8 +166,8 @@ const pickFile = () => {
 
 <template>
     <UPageList>
-        <UButton label="設定をエクスポート" color="primary" variant="solid" icon="lucide:upload" @click="exportSettings" />
-        <UButton label="設定をインポート" color="primary" variant="solid" icon="lucide:download" @click="pickFile"
+        <UButton label="設定をエクスポートする。" color="primary" variant="solid" icon="lucide:upload" @click="exportSettings" />
+        <UButton label="設定をインポートする。" color="primary" variant="solid" icon="lucide:download" @click="pickFile"
             class="mt-4" />
         <input ref="fileInputRef" type="file" accept="application/json" class="hidden" @change="handleFileChange" />
     </UPageList>

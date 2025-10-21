@@ -20,7 +20,7 @@ onMounted(() => {
                 icon: 'lucide:trending-up',
                 onClick: () => {
                     changelog.value = true
-                }                
+                }
             })
         }
         localStorage.setItem('ggrbk:appVersion', currentVersion)
@@ -81,6 +81,12 @@ const navItems = ref([
                         <UPageList>
                             <UButton label="URLをコピーする。" color="primary" variant="solid" icon="lucide:clipboard-copy"
                                 @click="copyHref(); share = false" class="my-2" />
+                            <UButton label="Xで共有する。" color="primary" variant="solid" icon="mingcute:social-x-line"
+                                :to="`https://x.com/intent/tweet?text=${encodeURIComponent('この素晴らしい検索ツールを試してみてください！ ' + locationOrigin)}&hashtags=GooglingGoJapan`"
+                                target="_blank" class="my-2" />
+                            <UButton label="メールで共有する。" color="primary" variant="solid" icon="lucide:mail"
+                                :to="`mailto:?subject=${encodeURIComponent('素晴らしい検索ツールを試してみてください！')}&body=${encodeURIComponent('この検索ツールを試してみてください: ' + locationOrigin)}`"
+                                target="_blank" class="my-2" />
                         </UPageList>
                     </template>
                 </UDrawer>

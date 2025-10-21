@@ -4,6 +4,12 @@ import type { TimelineItem } from '@nuxt/ui'
 const items = ref<TimelineItem[]>([
     {
         date: '2025/10/21',
+        title: '3.5.2',
+        description: '共有メニューに選択肢を追加。',
+        icon: 'lucide:share'
+    },
+    {
+        date: '2025/10/21',
         title: '3.5.1',
         description: 'metaタグにdescriptionを追加。',
         icon: 'lucide:tag'
