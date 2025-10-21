@@ -3,6 +3,12 @@ import type { TimelineItem } from '@nuxt/ui'
 
 const items = ref<TimelineItem[]>([
     {
+        date: '2025/10/21',
+        title: '3.5.1',
+        description: 'descriptionタグを追加。',
+        icon: 'lucide:tag'
+    },
+    {
         date: '2025/10/18',
         title: '3.5.0',
         description: '設定のエクスポート/インポート機能を追加。',

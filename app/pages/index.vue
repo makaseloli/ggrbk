@@ -79,7 +79,8 @@ const onSearchSubmit = () => {
 useHead(() => ({
   title: 'GooglingGo! Japan',
   meta: [
-    { property: 'og:description', content: metaDescription.value }
+    { property: 'og:description', content: metaDescription.value },
+    { name: 'description', content: metaDescription.value }
   ]
 }))
 
