@@ -2,7 +2,7 @@ export default defineAppConfig({
   ui: {
     drawer: {
       slots: {
-        content: 'w-full max-w-[750px] mx-auto'
+        content: 'md:w-full md:max-w-[750px] md:mx-auto'
       }
     },
     colors: {

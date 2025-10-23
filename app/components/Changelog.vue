@@ -3,6 +3,12 @@ import type { TimelineItem } from '@nuxt/ui'
 
 const items = ref<TimelineItem[]>([
     {
+        date: '2025/10/23',
+        title: '3.5.3',
+        description: 'スマホUIでドロワーがはみ出る問題を修正。',
+        icon: 'lucide:smartphone'
+    },
+    {
         date: '2025/10/21',
         title: '3.5.2',
         description: '共有メニューに選択肢を追加。',
