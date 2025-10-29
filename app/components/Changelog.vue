@@ -3,6 +3,12 @@ import type { TimelineItem } from '@nuxt/ui'
 
 const items = ref<TimelineItem[]>([
     {
+        date: '2025/10/29',
+        title: '3.6.0',
+        description: 'パッケージマネージャーをpnpmに変更。',
+        icon: 'lucide:database'
+    },
+    {
         date: '2025/10/23',
         title: '3.5.3',
         description: 'スマホUIでドロワーがはみ出る問題を修正。',
